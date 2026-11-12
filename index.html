@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Bandingkan biaya penggunaan mobil listrik, plug-in hybrid, bensin, dan diesel berdasarkan pola perjalanan Anda.">
+  <title>Kalkulator Biaya Kendaraan</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <main class="container">
+    <header class="intro">
+      <h1>Kalkulator biaya kendaraan</h1>
+      <p>Bandingkan biaya mobil listrik, plug-in hybrid, bensin, dan diesel dengan jarak tempuh yang sama. Kendaraan dan angka awal adalah contoh simulasi yang bisa Anda ubah.</p>
+      <a class="result-link" href="#hasil">Lihat hasil perbandingan ↓</a>
+    </header>
+    <noscript><p>Aktifkan JavaScript untuk menghitung dan menampilkan hasil.</p></noscript>
+    <div class="layout">
+      <form id="assumptions" aria-labelledby="assumptions-heading" novalidate>
+        <div class="section-heading">
+          <h2 id="assumptions-heading">Asumsi Anda</h2>
+          <button type="reset">Reset contoh</button>
+        </div>
+        <fieldset>
+          <legend>Jarak tempuh</legend>
+          <div class="fields">
+            <label>Jarak per hari (km)<input name="kmDay" type="number" min="0" max="1000" step="0.1" value="50" required></label>
+            <label>Hari berkendara per bulan<input name="daysMonth" type="number" min="1" max="31" value="26" required></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Pengisian listrik</legend>
+          <div class="fields">
+            <label>Porsi pengisian di rumah (%)<input id="home-share" name="homeShare" type="number" min="0" max="100" step="0.1" value="80" required></label>
+            <label for="public-share">Porsi pengisian di SPKLU (%)<output id="public-share" for="home-share">20%</output></label>
+            <label>Tarif rumah (Rp/kWh)<input name="homeRate" type="number" min="0" max="100000" step="1" value="1500" required></label>
+            <label>Tarif SPKLU (Rp/kWh)<input name="publicRate" type="number" min="0" max="100000" step="1" value="2500" required></label>
+            <label>Biaya layanan SPKLU (Rp/sesi)<input name="sessionFee" type="number" min="0" max="500000" step="1" value="10000" required></label>
+            <label>Energi dari jaringan per sesi SPKLU (kWh)<input name="sessionKwh" type="number" min="1" max="500" step="0.1" value="30" required></label>
+            <label>Energi hilang saat pengisian (%)<input name="chargingLoss" type="number" min="0" max="50" step="0.1" value="10" required></label>
+          </div>
+          <p class="hint">Porsi SPKLU otomatis mengisi sisanya. Isi 0% di rumah untuk menghitung skenario seluruh pengisian di SPKLU. Gunakan tarif yang sudah mencakup pungutan listrik yang Anda bayar.</p>
+        </fieldset>
+        <fieldset>
+          <legend>Konsumsi dan harga bahan bakar</legend>
+          <div class="fields">
+            <label>Mobil listrik (kWh/100 km)<input name="evConsumption" type="number" min="1" max="80" step="0.1" value="15" required></label>
+            <label>Plug-in hybrid saat memakai listrik (kWh/100 km)<input name="phevConsumption" type="number" min="1" max="80" step="0.1" value="16" required></label>
+            <label>Jarak listrik plug-in hybrid (%)<input name="electricShare" type="number" min="0" max="100" step="0.1" value="60" required></label>
+            <label>Plug-in hybrid saat memakai bensin (km/liter)<input name="phevEconomy" type="number" min="1" max="60" step="0.1" value="17" required></label>
+            <label>Mobil bensin (km/liter)<input name="petrolEconomy" type="number" min="1" max="60" step="0.1" value="12" required></label>
+            <label>Harga bensin (Rp/liter)<input name="petrolPrice" type="number" min="1" max="100000" step="1" value="13000" required></label>
+            <label>Mobil diesel (km/liter)<input name="dieselEconomy" type="number" min="1" max="60" step="0.1" value="15" required></label>
+            <label>Harga diesel (Rp/liter)<input name="dieselPrice" type="number" min="1" max="100000" step="1" value="14500" required></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Servis dan pajak</legend>
+          <label class="check"><input type="checkbox" name="includeFixed"> Tambahkan servis dan pajak tahunan</label>
+          <fieldset class="fixed-fields" id="fixed-fields" hidden disabled>
+            <legend>Biaya tahunan (Rp)</legend>
+            <div class="fields">
+              <label>Servis mobil listrik<input name="evService" type="number" min="0" max="1000000000" value="1000000" required></label>
+              <label>Pajak mobil listrik<input name="evTax" type="number" min="0" max="1000000000" value="500000" required></label>
+              <label>Servis plug-in hybrid<input name="phevService" type="number" min="0" max="1000000000" value="2000000" required></label>
+              <label>Pajak plug-in hybrid<input name="phevTax" type="number" min="0" max="1000000000" value="2000000" required></label>
+              <label>Servis mobil bensin<input name="petrolService" type="number" min="0" max="1000000000" value="2500000" required></label>
+              <label>Pajak mobil bensin<input name="petrolTax" type="number" min="0" max="1000000000" value="2500000" required></label>
+              <label>Servis mobil diesel<input name="dieselService" type="number" min="0" max="1000000000" value="3000000" required></label>
+              <label>Pajak mobil diesel<input name="dieselTax" type="number" min="0" max="1000000000" value="2500000" required></label>
+            </div>
+          </fieldset>
+        </fieldset>
+      </form>
+      <section id="hasil" aria-labelledby="results-heading">
+        <h2 id="results-heading">Hasil perbandingan</h2>
+        <p id="distance" class="hint"></p>
+        <p id="error" role="status" hidden></p>
+        <div id="results" class="results"></div>
+        <template id="result-card">
+          <article class="vehicle">
+            <h3></h3>
+            <p class="example"></p>
+            <dl class="totals">
+              <div><dt>Per tahun</dt><dd data-value="annual"></dd></div>
+              <div><dt>Per kilometer</dt><dd data-value="perKm"></dd></div>
+            </dl>
+            <dl class="breakdown"></dl>
+          </article>
+        </template>
+        <aside class="scope">
+          <h3>Biaya yang dihitung</h3>
+          <p>Simulasi menjumlahkan listrik dan BBM yang dipakai. Biaya listrik memperhitungkan energi yang hilang saat pengisian, tarif rumah dan SPKLU, serta biaya per sesi SPKLU. Jumlah sesi dibulatkan ke atas per tahun. Plug-in hybrid membagi jarak antara listrik dan bensin sesuai persentase yang Anda pilih.</p>
+          <p>Servis dan pajak ikut dihitung jika diaktifkan. Harga beli, cicilan, asuransi, parkir, penyusutan, dan penggantian baterai berada di luar simulasi. Angka per kilometer menggunakan total biaya tahunan dibagi jarak tahunan.</p>
+        </aside>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
