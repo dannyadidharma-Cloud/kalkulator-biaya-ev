@@ -28,6 +28,15 @@
             <label>Jarak per hari (km)<input name="kmDay" type="number" min="0" max="1000" step="0.1" value="50" required></label>
             <label>Hari berkendara per bulan<input name="daysMonth" type="number" min="1" max="31" value="26" required></label>
           </div>
+          <div class="fields period-field">
+            <label>Periode perbandingan
+              <select name="years">
+                <option value="1">1 tahun</option>
+                <option value="3">3 tahun</option>
+                <option value="5">5 tahun</option>
+              </select>
+            </label>
+          </div>
         </fieldset>
         <fieldset>
           <legend>Pengisian listrik</legend>
@@ -83,7 +92,8 @@
             <h3></h3>
             <p class="example"></p>
             <dl class="totals">
-              <div><dt>Per tahun</dt><dd data-value="annual"></dd></div>
+              <div><dt data-label="period"></dt><dd data-value="total"></dd></div>
+              <div data-row="annual" hidden><dt>Rata-rata per tahun</dt><dd data-value="annual"></dd></div>
               <div><dt>Per kilometer</dt><dd data-value="perKm"></dd></div>
             </dl>
             <dl class="breakdown"></dl>
@@ -92,7 +102,7 @@
         <aside class="scope">
           <h3>Biaya yang dihitung</h3>
           <p>Simulasi menjumlahkan listrik dan BBM yang dipakai. Biaya listrik memperhitungkan energi yang hilang saat pengisian, tarif rumah dan SPKLU, serta biaya per sesi SPKLU. Jumlah sesi dibulatkan ke atas per tahun. Plug-in hybrid membagi jarak antara listrik dan bensin sesuai persentase yang Anda pilih.</p>
-          <p>Servis dan pajak ikut dihitung jika diaktifkan. Harga beli, cicilan, asuransi, parkir, penyusutan, dan penggantian baterai berada di luar simulasi. Angka per kilometer menggunakan total biaya tahunan dibagi jarak tahunan.</p>
+          <p>Servis dan pajak ikut dihitung untuk setiap tahun jika diaktifkan. Simulasi memakai jarak dan tarif yang sama sepanjang periode. Harga beli, cicilan, asuransi, parkir, penyusutan, dan penggantian baterai berada di luar perhitungan. Biaya per kilometer dihitung dari total biaya dibagi total jarak selama periode pilihan.</p>
         </aside>
       </section>
     </div>

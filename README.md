@@ -14,7 +14,7 @@ Gunakan alamat server lokal tersebut agar browser bisa memuat modul JavaScript.
 
 Isi **50 km per hari** dan **26 hari per bulan**. Kalkulator memakai **15.600 km per tahun** untuk keempat kendaraan. Dengan nilai awal lainnya, mobil listrik contoh menghabiskan **Rp4.600.000 per tahun** atau sekitar **Rp295 per km**. Ubah porsi pengisian rumah dari 80% ke **0%** untuk mencoba **100% SPKLU**. Dengan tarif contoh yang sama, hasil mobil listrik menjadi **Rp7.370.000 per tahun** atau sekitar **Rp472 per km**. Tombol **Reset contoh** mengembalikan isian awal.
 
-Listrik mencakup tarif rumah dan SPKLU, energi yang hilang saat pengisian, serta biaya per sesi SPKLU. Jumlah sesi dihitung dari energi SPKLU setahun dan dibulatkan ke atas. Plug-in hybrid membagi jarak antara penggerak listrik dan bensin. Servis serta pajak tahunan dapat ditambahkan. Harga beli, cicilan, asuransi, parkir, penyusutan, dan penggantian baterai berada di luar simulasi.
+Pilih periode **1, 3, atau 5 tahun**. Pada contoh 50 km per hari dengan pengisian 100% di SPKLU, total listrik untuk 5 tahun adalah **Rp36.850.000** untuk 78.000 km. Biaya listrik mencakup tarif rumah dan SPKLU, energi yang hilang saat pengisian, serta biaya per sesi SPKLU. Jumlah sesi dihitung dari energi SPKLU setahun dan dibulatkan ke atas. Plug-in hybrid membagi jarak antara penggerak listrik dan bensin. Jika diaktifkan, biaya servis dan pajak berlaku setiap tahun sepanjang periode pilihan. Harga beli, cicilan, asuransi, parkir, penyusutan, dan penggantian baterai berada di luar simulasi.
 
 ## Pengujian
 
